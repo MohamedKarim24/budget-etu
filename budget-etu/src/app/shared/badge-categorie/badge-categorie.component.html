@@ -1,0 +1,14 @@
+@switch (categorie()) {
+  @case ('Alimentation') {
+    <span class="badge alimentation">Alimentation</span>
+  }
+  @case ('Loisirs') {
+    <span class="badge loisirs">Loisirs</span>
+  }
+  @case ('Logement') {
+    <span class="badge logement">Logement</span>
+  }
+  @default {
+    <span class="badge autre">{{ categorie() }}</span>
+  }
+}

@@ -1,0 +1,10 @@
+<div class="depense-card">
+  <div class="infos">
+    <h3>{{ depense().libelle }}</h3>
+    <p class="date">{{ depense().date | date:'dd/MM/yyyy' }}</p>
+  </div>
+  <div class="details">
+    <span class="montant">{{ depense().montant | currency:'EUR' }}</span>
+    <app-badge-categorie [categorie]="depense().categorie"></app-badge-categorie>
+  </div>
+</div>

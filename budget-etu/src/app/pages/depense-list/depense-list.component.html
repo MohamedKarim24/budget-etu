@@ -1,0 +1,45 @@
+<div class="depense-list-container">
+  <h2>Liste des dépenses</h2>
+
+  <div class="filters">
+    <label>
+      Mois :
+      <input type="month" [value]="mois()" (input)="mois.set($any($event.target).value)" />
+    </label>
+
+    <label>
+      Catégorie :
+      <select [value]="categorie()" (change)="categorie.set($any($event.target).value)">
+        <option value="">Toutes</option>
+        <option value="Alimentation">Alimentation</option>
+        <option value="Loisirs">Loisirs</option>
+        <option value="Logement">Logement</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="total-box">
+    <p>Total pour la sélection : <strong>{{ total() | currency:'EUR' }}</strong></p>
+  </div>
+
+  @if (resource.isLoading()) {
+    <p>Chargement des dépenses en cours...</p>
+  }
+
+  @if (resource.error()) {
+    <div class="error-box">
+      <p>Erreur lors du chargement des dépenses.</p>
+      <button (click)="reessayer()">Réessayer</button>
+    </div>
+  }
+
+  @if (resource.value()) {
+    <div class="list">
+      @for (depense of depensesFiltrees(); track depense.id) {
+        <app-depenses-card [depense]="depense"></app-depenses-card>
+      } @empty {
+        <p class="no-data">Aucune dépense ne correspond aux critères sélectionnés.</p>
+      }
+    </div>
+  }
+</div>
